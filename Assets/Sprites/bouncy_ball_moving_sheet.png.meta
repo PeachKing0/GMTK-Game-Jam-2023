@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 43edbc5ba3b79184a8294467d51a7672
+guid: 36fea25c131f288498e799b7d12ef0bf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_0
+      name: bouncy_ball_moving_sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98685ce53f1df0f43ae69a5673be4d78
-      internalID: -1663780290
+      spriteID: db63d81e51e091f41b4083583e1569d6
+      internalID: -1075607254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_1
+      name: bouncy_ball_moving_sheet_1
       rect:
         serializedVersion: 2
         x: 16
@@ -151,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 532d032337b9a7843bc9fb6f3d450195
-      internalID: 1367529094
+      spriteID: b46d0cda6a3cdc74a80f316df08289bb
+      internalID: -725631012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_2
+      name: bouncy_ball_moving_sheet_2
       rect:
         serializedVersion: 2
         x: 32
@@ -172,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b938258379c51f439124534dc952336
-      internalID: -1458252266
+      spriteID: 5e028bcc71ffb0e48b6f601f404b7d78
+      internalID: -81663414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_3
+      name: bouncy_ball_moving_sheet_3
       rect:
         serializedVersion: 2
         x: 48
@@ -193,71 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29aeded3752c8a145b5ddf3c4bc2ad68
-      internalID: -407255672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5dc3be05e95c0234e97d5c28cc7f8a30
-      internalID: -1274388043
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1fbfd37c46b5da4b805c310555a4c67
-      internalID: -1212098643
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bouncy_Mark_Rober_Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79480fa40a61a7f4080a1ff2a7308f00
-      internalID: -755291847
+      spriteID: 349b59d5f5d286d4481938ccf3da8139
+      internalID: 492804371
       vertices: []
       indices: 
       edges: []
@@ -273,13 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bouncy_Mark_Rober_Sheet_3: -407255672
-      Bouncy_Mark_Rober_Sheet_5: -1212098643
-      Bouncy_Mark_Rober_Sheet_2: -1458252266
-      Bouncy_Mark_Rober_Sheet_4: -1274388043
-      Bouncy_Mark_Rober_Sheet_6: -755291847
-      Bouncy_Mark_Rober_Sheet_0: -1663780290
-      Bouncy_Mark_Rober_Sheet_1: 1367529094
+      bouncy_ball_moving_sheet_2: -81663414
+      bouncy_ball_moving_sheet_1: -725631012
+      bouncy_ball_moving_sheet_0: -1075607254
+      bouncy_ball_moving_sheet_3: 492804371
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
