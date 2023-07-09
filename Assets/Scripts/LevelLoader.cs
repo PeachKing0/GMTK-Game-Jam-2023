@@ -9,15 +9,21 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
-    public string curScene;
+    public static string curScene;
 
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        curScene = SceneManager.GetActiveScene().name;
+    }
+
     public void LoadScene(string scene)
     {
+        curScene = scene;
         SceneManager.LoadScene(scene);
     }
 }

@@ -124,11 +124,14 @@ public class BallController : MonoBehaviour
         if (other.CompareTag("Wololo"))
         {
             collider.isTrigger = false;
-            if (type == BallType.Booze)
-            {
-                transform.localScale += new Vector3(5, 5, 0);
-            }
+            if (type == BallType.Booze) StartCoroutine(WaitToEnlargenThyBooze());
         }
+    }
+
+    IEnumerator WaitToEnlargenThyBooze()
+    {
+        yield return new WaitForSeconds(0.425f);
+        transform.localScale += new Vector3(5, 5, 0);
     }
 
     public enum BallType

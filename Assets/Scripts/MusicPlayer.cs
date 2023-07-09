@@ -79,4 +79,10 @@ public class MusicPlayer : MonoBehaviour
     {
         myAud.volume = slider.value;
     }
+
+    //Used for toggle
+    public void ToggleMusic(Toggle toggle)
+    {
+        myAud.mute = !toggle.isOn; //the "!" is janky, prevents weird reversal bug
+    }
 }

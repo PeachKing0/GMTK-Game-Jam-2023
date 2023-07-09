@@ -1844,11 +1844,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 1820651092}
   lives: {fileID: 1577317424}
+  playerPrefab: {fileID: 7689158785907023480, guid: 9e7fbc0acb5a2c048b42711c35917503, type: 3}
   camera: {fileID: 519420032}
   shakeDuration: 0
   shakeMagnitude: 0.3
   dampingSpeed: 1
   points: 0
+  pointsText: {fileID: 0}
+  speedText: {fileID: 0}
+  healthText: {fileID: 0}
+  toggleText: {fileID: 0}
 --- !u!4 &1247120936
 Transform:
   m_ObjectHideFlags: 0
@@ -6564,6 +6569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7689158785907023480, guid: 9e7fbc0acb5a2c048b42711c35917503, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9041423525231192323, guid: 9e7fbc0acb5a2c048b42711c35917503, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6607,10 +6616,6 @@ PrefabInstance:
     - target: {fileID: 9041423525231192323, guid: 9e7fbc0acb5a2c048b42711c35917503, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9213432110363848852, guid: 9e7fbc0acb5a2c048b42711c35917503, type: 3}
-      propertyPath: m_Radius
-      value: 0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e7fbc0acb5a2c048b42711c35917503, type: 3}

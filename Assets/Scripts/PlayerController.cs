@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        GameManager.instance.lives.text = $"Lives: {lives}";
     }
 
     private void Update()
