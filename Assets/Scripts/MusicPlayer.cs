@@ -37,6 +37,7 @@ public class MusicPlayer : MonoBehaviour
     {
         myAud = GetComponent<AudioSource>();
         //Play first track
+        myAud.Stop();
         FindRightTrack();
     }
 

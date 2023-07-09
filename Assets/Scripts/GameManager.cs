@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private float prev10Time = 0.0f;
     private float prev30Time = 0.0f;
     private float prev60Time = 0.0f;
+
+    [Header("References")]
     private BallSpawner spawner;
     private PlayerController player;
 
@@ -31,6 +33,9 @@ public class GameManager : MonoBehaviour
     public float shakeMagnitude = 0.7f;
     // A measure of how quickly the shake effect should evaporate
     public float dampingSpeed = 1.0f;
+
+    [Header("Points/Upgrades")]
+    public int points;
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         if (shakeDuration > 0)
         {
-            transform.localPosition = Random.insideUnitSphere * shakeMagnitude;
+            camera.localPosition = Random.insideUnitSphere * shakeMagnitude;
 
             shakeDuration -= Time.deltaTime * dampingSpeed;
         }
