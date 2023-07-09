@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour
     [Header("References")]
     private Rigidbody2D rb;
     private new Collider2D collider;
-    private Transform player;
+    private PlayerController player;
     public BallType type;
     public int bounces = 0;
     public LayerMask onion;
@@ -26,7 +26,7 @@ public class BallController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         collider.isTrigger = true;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = FindObjectOfType<PlayerController>();
         StartMovement();
     }
 
@@ -42,7 +42,7 @@ public class BallController : MonoBehaviour
             dir = randPos - transform.position;
         }
         else if (type == BallType.Mark_Rober || type == BallType.Bouncy_Rober)
-            dir = player.position - transform.position;
+            dir = player.transform.position - transform.position;
 
         dir.Normalize();
         moveInput_X = dir.x;
@@ -87,7 +87,13 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player")) Destroy(gameObject);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.lives--;
+            GameManager.instance.lives.text = $"Lives: {player.lives}";
+            if (player.lives == 0) LevelLoader.Instance.LoadScene("GameOver");
+            Destroy(gameObject);
+        }
         else
         {
             if (bounces > 0)

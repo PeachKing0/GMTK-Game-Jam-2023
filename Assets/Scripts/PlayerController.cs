@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameManager.instance.lives.text = $"Lives: {lives}";
     }
 
     private void Update()
@@ -59,12 +60,9 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void ExpireLifeMembership()
     {
-        if (other.gameObject.CompareTag("Ball"))
-        {
-            if (lives - 1 >= 0) lives--;
-        }
+        LevelLoader.Instance.LoadScene("GameOver");
     }
 
     public void SetCanMove(bool chingie) { canMove = chingie; }

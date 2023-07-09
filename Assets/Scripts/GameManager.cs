@@ -6,7 +6,15 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public TMP_Text timer;
+    public TMP_Text lives;
     private float time = 0.0f;
     private float prev10Time = 0.0f;
     private float prev30Time = 0.0f;

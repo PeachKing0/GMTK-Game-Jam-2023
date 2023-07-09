@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2169237319201941779}
   m_Layer: 6
   m_Name: Mark Rober Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   onion:
     serializedVersion: 2
     m_Bits: 128
-  moveSpeed: 25
+  moveSpeed: 26
   acceleration: 3
   deceleration: 15
   velPower: 1.3

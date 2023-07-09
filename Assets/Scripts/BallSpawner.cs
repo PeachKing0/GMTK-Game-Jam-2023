@@ -36,7 +36,7 @@ public class BallSpawner : MonoBehaviour
             spawnPos.x += Random.Range(-width, width);
         }
 
-        Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPos, Quaternion.identity);
+        Instantiate(prefabs[2], spawnPos, Quaternion.identity);
         StartCoroutine(WaitToSpawn());
     }
 
