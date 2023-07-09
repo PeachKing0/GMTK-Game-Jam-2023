@@ -1700,7 +1700,8 @@ MonoBehaviour:
   booze: {fileID: 7620290023204755492, guid: b769af281f61b084490dc5bef6c0fb06, type: 3}
   repeatTime: 3
   doSpawn: 1
-  boozeSpawn: {fileID: 0}
+  boozeSpawn: {fileID: 8300000, guid: 81549bc799d9bf34b9e8972a45f02b2a, type: 3}
+  boozeHitWall: {fileID: 8300000, guid: 8e607c0250287c044a16be31083e11ea, type: 3}
 --- !u!4 &1233287196
 Transform:
   m_ObjectHideFlags: 0
@@ -1843,10 +1844,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 1820651092}
   lives: {fileID: 1577317424}
-  camera: {fileID: 0}
+  camera: {fileID: 519420032}
   shakeDuration: 0
-  shakeMagnitude: 0.7
+  shakeMagnitude: 0.3
   dampingSpeed: 1
+  points: 0
 --- !u!4 &1247120936
 Transform:
   m_ObjectHideFlags: 0

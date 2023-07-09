@@ -85,21 +85,22 @@ public class GameManager : MonoBehaviour
 
     public void TriggerShake()
     {
-        shakeDuration = 2.0f;
+        shakeDuration = 0.4f;
     }
 
     private void Update()
     {
         if (shakeDuration > 0)
         {
-            camera.localPosition = Random.insideUnitSphere * shakeMagnitude;
+            Vector2 test = Random.insideUnitSphere * shakeMagnitude;
+            camera.localPosition = new Vector3(test.x, test.y, -10);
 
             shakeDuration -= Time.deltaTime * dampingSpeed;
         }
         else
         {
             shakeDuration = 0f;
-            transform.localPosition = Vector3.zero;
+            camera.localPosition = new Vector3(0,0,-10);
         }
     }
 
