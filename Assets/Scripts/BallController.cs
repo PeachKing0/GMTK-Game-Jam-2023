@@ -35,7 +35,7 @@ public class BallController : MonoBehaviour
         #region Inputs
         Vector2 dir = Vector2.zero;
 
-        if (type == BallType.Flimsy || type == BallType.Bouncy)
+        if (type == BallType.Flimsy || type == BallType.Bouncy || type == BallType.Booze)
         {
             Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
             Vector3 randPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), Random.Range(-screenBounds.y, screenBounds.y));
@@ -90,9 +90,11 @@ public class BallController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             player.lives--;
+            if (type == BallType.Booze) player.lives--;
             GameManager.instance.lives.text = $"Lives: {player.lives}";
-            if (player.lives == 0) LevelLoader.Instance.LoadScene("GameOver");
+            if (type == BallType.Booze) FindObjectOfType<BallSpawner>().doSpawn = true;
             Destroy(gameObject);
+            if (player.lives <= 0) LevelLoader.Instance.LoadScene("GameOver");
         }
         else
         {
@@ -100,15 +102,28 @@ public class BallController : MonoBehaviour
             {
                 StartMovement();
                 bounces--;
+                if (type == BallType.Booze) moveSpeed += 1.5f;
             }
-            else Destroy(gameObject);
+            else
+            {
+                if (type == BallType.Booze) FindObjectOfType<BallSpawner>().doSpawn = true;
+                Destroy(gameObject);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Wololo"))
+        {
+            print("Mega Funne");
             collider.isTrigger = false;
+            if (type == BallType.Booze)
+            {
+                print("Mega Funne Bunne");
+                transform.localScale += new Vector3(5, 5, 0);
+            }
+        }
     }
 
     public enum BallType
@@ -116,6 +131,7 @@ public class BallController : MonoBehaviour
         Flimsy,
         Bouncy,
         Mark_Rober,
-        Bouncy_Rober
+        Bouncy_Rober,
+        Booze
     }
 }

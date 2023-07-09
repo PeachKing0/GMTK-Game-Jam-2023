@@ -18,8 +18,19 @@ public class GameManager : MonoBehaviour
     private float time = 0.0f;
     private float prev10Time = 0.0f;
     private float prev30Time = 0.0f;
+    private float prev60Time = 0.0f;
     private BallSpawner spawner;
     private PlayerController player;
+
+    [Header("ScreenShake")]
+    // Transform of the GameObject you want to shake
+    public new Transform camera;
+    // Desired duration of the shake effect
+    public float shakeDuration = 0.0f;
+    // A measure of magnitude for the shake. Tweak based on your preference
+    public float shakeMagnitude = 0.7f;
+    // A measure of how quickly the shake effect should evaporate
+    public float dampingSpeed = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,26 +41,60 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        time += Time.fixedDeltaTime;
-        DisplayTime(time);
-        if (time - prev10Time >= 10)
+        if (timer != null)
         {
-            if (spawner.prefabs[0].GetComponent<BallController>().moveSpeed + 1 <= 50)
+            time += Time.fixedDeltaTime;
+            DisplayTime(time);
+            if (time - prev10Time >= 10)
             {
-                for (int i = 0; i < spawner.prefabs.Length; i++)
+                if (spawner.prefabs[0].GetComponent<BallController>().moveSpeed + 1 <= 50)
                 {
-                    spawner.prefabs[i].GetComponent<BallController>().moveSpeed++;
+                    for (int i = 0; i < spawner.prefabs.Length; i++)
+                    {
+                        spawner.prefabs[i].GetComponent<BallController>().moveSpeed++;
+                    }
                 }
+                prev10Time = time;
+                print("10 sec");
             }
-            prev10Time = time;
-            print("10 sec");
+            if (time - prev30Time >= 30)
+            {
+                if (spawner.repeatTime - 0.25f >= 0.75f)
+                    spawner.repeatTime -= 0.25f;
+                prev30Time = time;
+                print("30 sec");
+            }
+            if (time - prev60Time >= 60)
+            {
+                BallController[] balls = FindObjectsOfType<BallController>();
+                for (int i = 0; i < balls.Length; i++)
+                {
+                    Destroy(balls[i].gameObject);
+                }
+                spawner.doSpawn = false;
+                spawner.SpawnBooze();
+                prev60Time = time;
+            }
         }
-        if (time - prev30Time >= 30)
+    }
+
+    public void TriggerShake()
+    {
+        shakeDuration = 2.0f;
+    }
+
+    private void Update()
+    {
+        if (shakeDuration > 0)
         {
-            if (spawner.repeatTime - 0.25f >= 0.75f)
-                spawner.repeatTime -= 0.25f;
-            prev30Time = time;
-            print("30 sec");
+            transform.localPosition = Random.insideUnitSphere * shakeMagnitude;
+
+            shakeDuration -= Time.deltaTime * dampingSpeed;
+        }
+        else
+        {
+            shakeDuration = 0f;
+            transform.localPosition = Vector3.zero;
         }
     }
 

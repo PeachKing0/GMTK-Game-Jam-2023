@@ -138,11 +138,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  bounces: 10
+  bounces: 3
   onion:
     serializedVersion: 2
     m_Bits: 128
-  moveSpeed: 26
+  moveSpeed: 25
   acceleration: 3
   deceleration: 15
   velPower: 1.3
