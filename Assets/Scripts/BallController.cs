@@ -8,6 +8,7 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb;
     private new Collider2D collider;
     private PlayerController player;
+    private AudioSource audioSource;
     public BallType type;
     public int bounces = 0;
     public LayerMask onion;
@@ -27,6 +28,7 @@ public class BallController : MonoBehaviour
         collider = GetComponent<Collider2D>();
         collider.isTrigger = true;
         player = FindObjectOfType<PlayerController>();
+        audioSource = FindObjectOfType<BallSpawner>().GetComponent<AudioSource>();
         StartMovement();
     }
 
@@ -102,7 +104,12 @@ public class BallController : MonoBehaviour
             {
                 StartMovement();
                 bounces--;
-                if (type == BallType.Booze) moveSpeed += 1.5f;
+                if (type == BallType.Booze)
+                {
+                    audioSource.PlayOneShot(FindObjectOfType<BallSpawner>().boozeHitWall);
+                    moveSpeed += 3.5f;
+                    GameManager.instance.TriggerShake();
+                }
             }
             else
             {
@@ -116,11 +123,9 @@ public class BallController : MonoBehaviour
     {
         if (other.CompareTag("Wololo"))
         {
-            print("Mega Funne");
             collider.isTrigger = false;
             if (type == BallType.Booze)
             {
-                print("Mega Funne Bunne");
                 transform.localScale += new Vector3(5, 5, 0);
             }
         }

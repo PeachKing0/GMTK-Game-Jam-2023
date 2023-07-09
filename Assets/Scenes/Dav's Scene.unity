@@ -2738,7 +2738,11 @@ MonoBehaviour:
   - {fileID: 7620290023204755492, guid: e83dfce51466647409eaadd02f6142d3, type: 3}
   - {fileID: 7620290023204755492, guid: 9f0528d8b14de174bb37bad71136ea1b, type: 3}
   - {fileID: 7620290023204755492, guid: bfa14cf4aa357964a927f11e0f63c6eb, type: 3}
+  booze: {fileID: 0}
   repeatTime: 3
+  doSpawn: 1
+  boozeSpawn: {fileID: 8300000, guid: 81549bc799d9bf34b9e8972a45f02b2a, type: 3}
+  boozeHitWall: {fileID: 8300000, guid: 8e607c0250287c044a16be31083e11ea, type: 3}
 --- !u!4 &1842393056
 Transform:
   m_ObjectHideFlags: 0
@@ -2764,7 +2768,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: f737fc879f198a54aac006459bf0c365, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 17925162f99e4ad41b2e3125df037314, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 81549bc799d9bf34b9e8972a45f02b2a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

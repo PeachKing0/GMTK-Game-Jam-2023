@@ -11,6 +11,7 @@ public class BallSpawner : MonoBehaviour
     private new Camera camera;
     private AudioSource audioSource;
     public AudioClip boozeSpawn;
+    public AudioClip boozeHitWall;
 
     private void Start()
     {
@@ -68,7 +69,7 @@ public class BallSpawner : MonoBehaviour
         }
 
         Instantiate(booze, spawnPos, Quaternion.identity);
-        //audioSource.PlayOneShot(boozeSpawn);
+        audioSource.PlayOneShot(boozeSpawn);
     }
 
     IEnumerator WaitToSpawn()
