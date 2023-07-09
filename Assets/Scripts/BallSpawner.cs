@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
 {
-    public GameObject prefab;
-    private float repeatTime = 3.0f;
+    public GameObject[] prefabs;
+    public float repeatTime = 3.0f;
     private new Camera camera;
 
     private void Start()
     {
+        //Reset back to default vals
+        repeatTime = 3;
+        for (int i = 0; i < prefabs.Length; i++) prefabs[i].GetComponent<BallController>().moveSpeed = 25;
+
         camera = FindObjectOfType<Camera>();
         Invoke("SpawnBall", 1.0f);
     }
@@ -17,8 +21,8 @@ public class BallSpawner : MonoBehaviour
     private void SpawnBall()
     {
         Vector2 spawnPos = Vector2.zero;
-        float height = camera.orthographicSize + 0.25f;
-        float width = camera.orthographicSize * camera.aspect + 0.25f;
+        float height = camera.orthographicSize + 0.35f;
+        float width = camera.orthographicSize * camera.aspect + 0.35f;
         spawnPos.x = Random.Range(-0.5f, 0.5f);
         spawnPos.y = Random.Range(-0.5f, 0.5f);
         if (spawnPos.x > spawnPos.y)
@@ -32,7 +36,7 @@ public class BallSpawner : MonoBehaviour
             spawnPos.x += Random.Range(-width, width);
         }
 
-        Instantiate(prefab, spawnPos, Quaternion.identity);
+        Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPos, Quaternion.identity);
         StartCoroutine(WaitToSpawn());
     }
 

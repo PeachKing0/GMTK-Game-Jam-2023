@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int lives = 3;
+
     [Header("References")]
     private Rigidbody2D rb;
 
     [Header("Movement")]
     [Range(0, 25)] public float moveSpeed;
     [Range(0, 25)] public float acceleration;
-    [Range(0, 25)] public float deceleration;
+    [Range(0, 50)] public float deceleration;
     [Range(0, 5)] public float velPower;
     [field: SerializeField] public bool canMove { get; private set; } = true;
     private float moveInput_X;
@@ -55,6 +57,14 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(movement_Y * Vector2.up);
         }
         #endregion
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            if (lives - 1 >= 0) lives--;
+        }
     }
 
     public void SetCanMove(bool chingie) { canMove = chingie; }

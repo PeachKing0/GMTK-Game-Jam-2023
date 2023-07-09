@@ -6,22 +6,26 @@ public class BallController : MonoBehaviour
 {
     [Header("References")]
     private Rigidbody2D rb;
+    private new Collider2D collider;
     private Transform player;
     public BallType type;
     public int bounces = 0;
+    public LayerMask onion;
 
     [Header("Movement")]
-    [Range(0, 25)] public float moveSpeed;
+    [Range(25, 50)] public float moveSpeed;
     [Range(0, 25)] public float acceleration;
     [Range(0, 25)] public float deceleration;
     [Range(0, 5)] public float velPower;
-    [field: SerializeField] public bool canMove { get; private set; } = true;
+    public float targetVel = 25;
     private float moveInput_X;
     private float moveInput_Y;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
+        collider.isTrigger = true;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         StartMovement();
     }
@@ -29,55 +33,77 @@ public class BallController : MonoBehaviour
     private void StartMovement()
     {
         #region Inputs
-        if (canMove)
+        Vector2 dir = Vector2.zero;
+
+        if (type == BallType.Flimsy || type == BallType.Bouncy)
         {
-            if (type == BallType.Flimsy || type == BallType.Bouncy)
-            {
-
-            }
-            else if (type == BallType.Mark_Rober || type == BallType.Bouncy_Rober)
-            {
-                Vector2 dir = transform.position - player.position;
-
-                if (dir.x == 0) moveInput_X = 0;
-                else moveInput_X = (dir.x > 0) ? moveInput_X = -1 : moveInput_X = 1;
-
-                if (dir.y == 0) moveInput_Y = 0;
-                else moveInput_Y = (dir.y > 0) ? moveInput_Y = -1 : moveInput_Y = 1;
-            }
-            Moverton();
+            Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+            Vector3 randPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), Random.Range(-screenBounds.y, screenBounds.y));
+            dir = randPos - transform.position;
         }
+        else if (type == BallType.Mark_Rober || type == BallType.Bouncy_Rober)
+            dir = player.position - transform.position;
+
+        dir.Normalize();
+        moveInput_X = dir.x;
+        moveInput_Y = dir.y;
+        Moverton();
         #endregion
     }
 
     private void Moverton()
     {
         #region Movement
-        if (canMove)
-        {
-            //calculate the direction we want to move in and our desired velocity
-            float targetSpeed_X = moveInput_X * moveSpeed;
-            float targetSpeed_Y = moveInput_Y * moveSpeed;
-            //calculate difference between current velocity and desired velocity
-            float speedDif_X = targetSpeed_X - rb.velocity.x;
-            float speedDif_Y = targetSpeed_Y - rb.velocity.y;
-            //change acceleration rate depending on situation
-            float accelRate_X = (Mathf.Abs(speedDif_X) > 0.01f) ? acceleration : deceleration;
-            float accelRate_Y = (Mathf.Abs(speedDif_Y) > 0.01f) ? acceleration : deceleration;
-            //applies acceleration to speed difference, then raises to a set power so acceleration increases with higher speeds
-            //finally multiplies by sign to reapply direction
-            float movement_X = Mathf.Pow(Mathf.Abs(speedDif_X) * accelRate_X, velPower) * Mathf.Sign(speedDif_X);
-            float movement_Y = Mathf.Pow(Mathf.Abs(speedDif_Y) * accelRate_Y, velPower) * Mathf.Sign(speedDif_Y);
-            //applies force to rigidbody
-            rb.AddForce(movement_X * Vector2.right);
-            rb.AddForce(movement_Y * Vector2.up);
+        //calculate the direction we want to move in and our desired velocity
+        float targetSpeed_X = moveInput_X * moveSpeed;
+        float targetSpeed_Y = moveInput_Y * moveSpeed;
+        //calculate difference between current velocity and desired velocity
+        float speedDif_X = targetSpeed_X - rb.velocity.x;
+        float speedDif_Y = targetSpeed_Y - rb.velocity.y;
+        //change acceleration rate depending on situation
+        float accelRate_X = (Mathf.Abs(speedDif_X) > 0.01f) ? acceleration : deceleration;
+        float accelRate_Y = (Mathf.Abs(speedDif_Y) > 0.01f) ? acceleration : deceleration;
+        //applies acceleration to speed difference, then raises to a set power so acceleration increases with higher speeds
+        //finally multiplies by sign to reapply direction
+        float movement_X = Mathf.Pow(Mathf.Abs(speedDif_X) * accelRate_X, velPower) * Mathf.Sign(speedDif_X);
+        float movement_Y = Mathf.Pow(Mathf.Abs(speedDif_Y) * accelRate_Y, velPower) * Mathf.Sign(speedDif_Y);
 
-            canMove = false;
-        }
+        //applies force to rigidbody
+        rb.AddForce(movement_X * Vector2.right);
+        rb.AddForce(movement_Y * Vector2.up);
         #endregion
     }
 
-    public void SetCanMove(bool chingie) { canMove = chingie; }
+    private void FixedUpdate()
+    {
+        if (rb.velocity == Vector2.zero) StartMovement();
+
+        if (rb.velocity.magnitude < 4.5f)
+        {
+            Vector2 test = Vector2.zero;
+            rb.velocity = test;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player")) Destroy(gameObject);
+        else
+        {
+            if (bounces > 0)
+            {
+                StartMovement();
+                bounces--;
+            }
+            else Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wololo"))
+            collider.isTrigger = false;
+    }
 
     public enum BallType
     {
