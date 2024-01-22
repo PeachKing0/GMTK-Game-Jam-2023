@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
         //Apply all upgrades if any
         if (upgrades)
         {
-            playerPrefab.GetComponent<PlayerController>().moveSpeed += speedUpd * 1;
-            playerPrefab.GetComponent<PlayerController>().lives += healthUpd;
+            playerPrefab.GetComponent<PlayerController>().moveSpeed = initialMoveSpeed + speedUpd;
+            playerPrefab.GetComponent<PlayerController>().lives = initialLives + healthUpd;
         }
         else
         {
